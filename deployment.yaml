@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: catdogs
+spec:
+  selector:
+    matchLabels:
+      app: nginx
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: cat-reviews
+        image: nginx_cat
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
+        command: ["/bin/sh"]
+
+      - name: dog-reviews
+        image: nginx_dog
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
